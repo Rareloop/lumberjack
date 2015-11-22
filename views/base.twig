@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html class="no-js" {{ site.language_attributes }}>
+
+    {% include 'html-header.twig' %}
+
+    <body class="{{ body_class }}">
+        {% include 'components/common/site-header.twig' %}
+
+        {% block content %}
+            <p>Sorry, no content</p>
+        {% endblock %}
+
+        {% include 'components/common/site-footer.twig' %}
+
+        {% include 'html-footer.twig' %}
+	</body>
+</html>
