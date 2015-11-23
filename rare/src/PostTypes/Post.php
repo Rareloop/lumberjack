@@ -23,7 +23,7 @@ class Post extends TimberPost
     }
 
     /**
-     * Convienience function that takes a standard set of WP_Query arguments but mixes it with
+     * Convenience function that takes a standard set of WP_Query arguments but mixes it with
      * arguments that mean we're selecting the right post type
      *
      * @param  array $args standard WP_Query array
