@@ -61,22 +61,22 @@ It will attempt to load a class under the `Rare` namespace only. If you need a s
 
 This directory aims to hold all the general, theme wide classes which are responsible for setting everything up correctly. For example, we may need to define custom post types, taxonomies or add specific theme support.
 
-When creating new classes in this directory, ensure they are under the `Rare\Library` namespace. We're using static methods on these classes for 1 main reason:
+When creating new classes in this directory, ensure they are under the `Rare\Core` namespace. We're using static methods on these classes for 1 main reason:
 
 They're not really objects in their own right, and therefore instantiating it doesn't make any sense. For example:
 
 ```php
 // Bad
-$themeSupport = new \Rare\Library\ThemeSupport;
+$themeSupport = new \Rare\Core\ThemeSupport;
 $themeSupport->register();
 
 // Good
-\Rare\Library\ThemeSupport::register();
+\Rare\Core\ThemeSupport::register();
 ```
 
 **src/PostTypes**
 
-If you have defined any custom post types in `Rare\Library\PostTypes`, you'll need to create a new class here. There's already a `Post.php` class which extends Timber's [TimberPost](https://github.com/jarednova/timber/wiki/TimberPost).
+If you have defined any custom post types in `Rare\Core\PostTypes`, you'll need to create a new class here. There's already a `Post.php` class which extends Timber's [TimberPost](https://github.com/jarednova/timber/wiki/TimberPost).
 
 These files act like **models**, in as much as they should be the single point of access when interacting with the post type.
 

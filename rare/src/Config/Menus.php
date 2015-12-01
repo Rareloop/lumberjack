@@ -1,6 +1,6 @@
 <?php
 
-namespace Rare\Functions;
+namespace Rare\Config;
 
 class Menus
 {

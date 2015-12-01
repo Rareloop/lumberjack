@@ -1,6 +1,6 @@
 <?php
 
-namespace Rare\Library;
+namespace Rare\Core;
 
 use TimberMenuItem;
 

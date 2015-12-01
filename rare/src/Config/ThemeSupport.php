@@ -1,6 +1,6 @@
 <?php
 
-namespace Rare\Library;
+namespace Rare\Core;
 
 class ThemeSupport
 {
@@ -9,9 +9,5 @@ class ThemeSupport
         add_theme_support('post-formats');
         add_theme_support('post-thumbnails');
         add_theme_support('menus');
-
-        if (function_exists('acf_add_options_page')) {
-            acf_add_options_page();
-        }
     }
 }

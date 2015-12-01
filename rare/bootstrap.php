@@ -2,17 +2,29 @@
 
 namespace Rare;
 
-use Rare\Library\Site;
-use Rare\Library\ThemeSupport;
-use Rare\Library\CustomPostTypes;
-use Rare\Library\CustomTaxonomies;
+use Rare\Core\Site;
+use Rare\Config\ThemeSupport;
+use Rare\Config\CustomPostTypes;
+use Rare\Config\CustomTaxonomies;
+use Rare\Config\Menus;
 use Rare\Functions\Assets;
-use Rare\Functions\Menus;
 
 require_once('autoload.php');
 
+/**
+ * ------------------
+ * Core
+ * ------------------
+ */
+
 // Set up the default Timber context & extend Twig for the site
 new Site;
+
+/**
+ * ------------------
+ * Config
+ * ------------------
+ */
 
 // Register support of certain theme features
 ThemeSupport::register();
@@ -23,8 +35,14 @@ CustomPostTypes::register();
 // Register any custom taxonomies
 CustomTaxonomies::register();
 
-// Enqueue assets
-Assets::load();
-
 // Register WordPress menus
 Menus::register();
+
+/**
+ * ------------------
+ * Functions
+ * ------------------
+ */
+
+// Enqueue assets
+Assets::load();

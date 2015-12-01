@@ -1,10 +1,10 @@
 <?php
 
-namespace Rare\Library;
+namespace Rare\Core;
 
 use TimberSite;
 use TimberHelper;
-use Rare\Library\Menu;
+use Rare\Core\Menu;
 
 class Site extends TimberSite
 {

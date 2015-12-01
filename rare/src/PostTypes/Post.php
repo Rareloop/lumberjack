@@ -9,6 +9,12 @@ class Post extends TimberPost
 {
     protected static $postType = 'post';
 
+    /**
+     * Get all posts of this type
+     *
+     * @param  integer $perPage The number of items to return (defaults to all)
+     * @return array           Array of Post objects
+     */
     public static function all($perPage = -1)
     {
         $args = [
@@ -55,9 +61,6 @@ class Post extends TimberPost
         return Timber::get_posts($args, get_called_class());
     }
 
-    /**
-     * Get the current post type
-     */
     public static function postType()
     {
         return static::$postType;

@@ -1,12 +1,12 @@
 <?php
 
-namespace Rare\Library;
+namespace Rare\Core;
 
 class CustomTaxonomies
 {
     public static function register()
     {
-        add_action('init', ['\Rare\Library\CustomTaxonomies', 'taxonomies']);
+        add_action('init', [get_called_class(), 'taxonomies']);
     }
 
     public static function taxonomies()
