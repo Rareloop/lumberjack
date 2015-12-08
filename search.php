@@ -9,7 +9,7 @@
  * @since   Timber 0.1
  */
 
-use Rare\PostTypes\Post;
+use Lumberjack\PostTypes\Post;
 
 $templates = ['search.twig', 'posts.twig', 'generic-page.twig'];
 $context = Timber::get_context();

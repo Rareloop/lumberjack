@@ -1,12 +1,12 @@
 <?php
 
-namespace Rare\Core;
+namespace Lumberjack\Core;
 
 use TimberMenuItem;
 
 class MenuItem extends TimberMenuItem
 {
-    public $PostClass = 'Rare\PostTypes\Post';
+    public $PostClass = 'Lumberjack\PostTypes\Post';
 
     public $listItemClass = 'page-list__item';
 

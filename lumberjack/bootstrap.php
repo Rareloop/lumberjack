@@ -1,13 +1,13 @@
 <?php
 
-namespace Rare;
+namespace Lumberjack;
 
-use Rare\Core\Site;
-use Rare\Config\ThemeSupport;
-use Rare\Config\CustomPostTypes;
-use Rare\Config\CustomTaxonomies;
-use Rare\Config\Menus;
-use Rare\Functions\Assets;
+use Lumberjack\Core\Site;
+use Lumberjack\Config\ThemeSupport;
+use Lumberjack\Config\CustomPostTypes;
+use Lumberjack\Config\CustomTaxonomies;
+use Lumberjack\Config\Menus;
+use Lumberjack\Functions\Assets;
 
 require_once('autoload.php');
 

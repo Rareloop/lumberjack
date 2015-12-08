@@ -1,6 +1,6 @@
 <?php
 
-namespace Rare\Config;
+namespace Lumberjack\Config;
 
 class Menus
 {

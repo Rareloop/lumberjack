@@ -14,7 +14,7 @@
  * @since   Timber 0.2
  */
 
-use Rare\PostTypes\Post;
+use Lumberjack\PostTypes\Post;
 
 $templates = ['posts.twig', 'generic-page.twig'];
 

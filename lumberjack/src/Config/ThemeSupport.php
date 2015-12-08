@@ -1,6 +1,6 @@
 <?php
 
-namespace Rare\Core;
+namespace Lumberjack\Config;
 
 class ThemeSupport
 {

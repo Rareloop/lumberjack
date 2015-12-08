@@ -1,12 +1,18 @@
-# Rareloop Starter Theme
+# Lumberjack Starter Theme
 
 This is a Wordpress starter theme based on Timber's starter theme, which uses Twig for templating.
+
+![Lumberjack Wordpress starter theme](http://www.adamtom.at/app/uploads/2015/10/lumberjack.jpg "Lumberjack Wordpress starter theme")
 
 The theme works best when used with Bedrock.
 
 - Timber: https://github.com/jarednova/timber/wiki/Timber-docs
 - Twig: http://twig.sensiolabs.org/documentation
 - Bedrock: https://roots.io/bedrock
+
+When researching, we came across this awesome [Timber Starter Theme](https://github.com/Upstatement/timber-starter-theme) by [Upstatement](http://upstatement.com/). I want to give them credit and thanks as I used their controller logic (e.g. `page.php`) in Lumberjack. Cheers!
+
+For more detailed information, see [Supercharging WordPress with Lumberjack](http://www.adamtom.at/articles/supercharging-…ith-lumberjack/)
 
 ## Requirements
 
@@ -16,7 +22,7 @@ The theme works best when used with Bedrock.
 ## Features
 
 - Uses the Twig Templating Engine with Timber, which seperates data and logic from views.
-- Everything under the `rare/` directory is namespaced
+- Everything under the `lumberjack/` directory is namespaced
 - Provides a foundation with default configuration which does all the heavy lifting for you
 
 ## Coding Style
@@ -33,11 +39,11 @@ Out the box, this theme should have everything you need to get up and running as
 
 Simply put, this is where your **css**, **javascript** and **images** live (& **fonts** too). We advice developing the frontend in isolation, so these directories should only contain production-ready scripts (e.g. minified & concatenated).
 
-### rare
+### lumberjack
 
 This is where the magic happens. It comes bootstrapped with all sorts of goodies out the box, and can also be extended with ease.
 
-The bootstrapping is triggered in `functions.php`, and from there it autoloads any classes under the `Rare` namespace that are being referenced in our code.
+The bootstrapping is triggered in `functions.php`, and from there it autoloads any classes under the `Lumberjack` namespace that are being referenced in our code.
 
 **bootstrap.php**
 
@@ -55,28 +61,35 @@ We see this file as a starting point, and can be changed depending on the site's
 
 It's unlikely that you'll need to change this file. It's responsible for trying to load a namepsaced class. See [autoloader examples](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader-examples.md)
 
-It will attempt to load a class under the `Rare` namespace only. If you need a secondary namespace, you'll need to revisit the implementation.
+It will attempt to load a class under the `Lumberjack` namespace only. If you need a secondary namespace, you'll need to revisit the implementation.
 
-**src/Library**
+**src/Core**
 
-This directory aims to hold all the general, theme wide classes which are responsible for setting everything up correctly. For example, we may need to define custom post types, taxonomies or add specific theme support.
+These classes are the bread and butter of Lumberjack and contain the base classes used throughout the theme. Typically, they’ll extend Timber too. The main file here is `Core/Site.php`, which extends `TimberSite`. This lets us add our own data to the global context and bring in any Twig extensions if needed.
 
-When creating new classes in this directory, ensure they are under the `Rare\Core` namespace. We're using static methods on these classes for 1 main reason:
+When creating new classes in this directory, ensure they are under the `Lumberjack\Core` namespace. We're using static methods on these classes for 1 main reason:
 
 They're not really objects in their own right, and therefore instantiating it doesn't make any sense. For example:
 
 ```php
 // Bad
-$themeSupport = new \Rare\Core\ThemeSupport;
+$themeSupport = new \Lumberjack\Core\ThemeSupport;
 $themeSupport->register();
 
 // Good
-\Rare\Core\ThemeSupport::register();
+\Lumberjack\Core\ThemeSupport::register();
 ```
+**src/Config**
+
+This is where you would register any configurations with WordPress, such as any custom post types, menus, taxonomies and theme support. These are just normal PHP classes, no fancy extending here.
+
+Again, we do not care about state with these so every method is static.
+
+Taking `CustomPostTypes` as an example, it has a `register()` method which simply hooks into the WordPress action `init`, and will run the `types()` method. This will then register any custom post types. This file has one already defined as an example.
 
 **src/PostTypes**
 
-If you have defined any custom post types in `Rare\Core\PostTypes`, you'll need to create a new class here. There's already a `Post.php` class which extends Timber's [TimberPost](https://github.com/jarednova/timber/wiki/TimberPost).
+If you have defined any custom post types in `Lumberjack\Config\CustomPostTypes`, you'll need to create a new class here. There's already a `Post.php` class which extends Timber's [TimberPost](https://github.com/jarednova/timber/wiki/TimberPost).
 
 These files act like **models**, in as much as they should be the single point of access when interacting with the post type.
 
@@ -93,20 +106,25 @@ $context['posts'] = Timber::get_posts(); // Grab posts from the_loop
 
 This works fine, but say you have a method on a custom post type that you want to use in your view (e.g. `getInitials()` that returns an employees initials). By default, `TimberPost` available in every view. But we can overwrite this by telling `Timber::get_posts()` we want it to return a new class for each post returned. This means that we can use our **Employee** model in our view instead of **TimberPost** - which has the `getInitials()` method available.
 
-`Rare\PostTypes\Post` is set up to do this for us already. We've also added methods which will get you all posts or let you search for posts. For example, we can now do this:
+`Lumberjack\PostTypes\Post` is set up to do this for us already. We've also added methods which will get you all posts or let you search for posts. For example, we can now do this:
 
 ```php
+<?php
+
 // Getting a single post
-$context['post'] = new Rare\PostTypes\Post();
+$context['post'] = new Lumberjack\PostTypes\Post();
 
 // Getting posts
-$context['posts'] = Rare\PostTypes\Post::all(); // Grab posts from the\_loop
+$context['posts'] = Lumberjack\PostTypes\Post::all(); // Grab posts from the\_loop
 
 // Looking for draft posts
 $args = [
     'post_status'   => 'draft',
 ];
-$context['posts'] = Rare\PostTypes\Post::posts($args);
+
+$context['posts'] = Lumberjack\PostTypes\Post::posts($args);
+
+?>
 ```
 
 Now anything related to a post goes through our `Post` model. We've abstracted away Timber to make it more maintainable.
@@ -116,11 +134,11 @@ Creating a new post type is extremely easy. Take a look at `Project.php`, which 
 ```php
 <?php
 
-namespace Rare\PostTypes;
+namespace Lumberjack\PostTypes;
 
 class Project extends Post {
 
-    protected static $postType = 'rare_project';
+    protected static $postType = 'lumberjack_project';
 
 } ?>
 ```
@@ -128,17 +146,22 @@ class Project extends Post {
 And now we can use this like so:
 
 ```php
+<?php
+
 // Getting a single post
-$context['post'] = new Rare\PostTypes\Project();
+$context['post'] = new Lumberjack\PostTypes\Project();
 
 // Getting posts
-$context['posts'] = Rare\PostTypes\Project::all(); // Grab posts from the\_loop
+$context['posts'] = Lumberjack\PostTypes\Project::all(); // Grab posts from the\_loop
 
 // Looking for draft posts
 $args = [
     'post_status' => 'draft',
 ];
-$context['posts'] = Rare\PostTypes\Project::posts($args);
+
+$context['posts'] = Lumberjack\PostTypes\Project::posts($args);
+
+?>
 ```
 
 **src/Functions**
@@ -156,7 +179,7 @@ Here's an example:
 ```php
 <?php
 
-namespace Rare\Functions;
+namespace Lumberjack\Functions;
 
 class Assets
 {

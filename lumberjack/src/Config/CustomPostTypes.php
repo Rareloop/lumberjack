@@ -1,8 +1,8 @@
 <?php
 
-namespace Rare\Core;
+namespace Lumberjack\Config;
 
-use Rare\PostTypes\Project;
+use Lumberjack\PostTypes\Project;
 
 class CustomPostTypes
 {
@@ -15,7 +15,7 @@ class CustomPostTypes
     {
         // Project
         register_post_type(
-            Project::$postType,
+            Project::postType(),
             [
                 'labels' => [
                     'name' => __('Projects'),

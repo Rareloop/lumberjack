@@ -10,7 +10,7 @@
  */
 global $wp_query;
 
-use Rare\PostTypes\Post;
+use Lumberjack\PostTypes\Post;
 
 $data = Timber::get_context();
 

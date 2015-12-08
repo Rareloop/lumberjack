@@ -1,6 +1,6 @@
 <?php
 
-namespace Rare\PostTypes;
+namespace Lumberjack\PostTypes;
 
 use Timber;
 use TimberPost;

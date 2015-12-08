@@ -3,7 +3,7 @@
 Template Name: Home Page Template
 */
 
-use Rare\PostTypes\Post;
+use Lumberjack\PostTypes\Post;
 
 $context = Timber::get_context();
 $post = new Post();
