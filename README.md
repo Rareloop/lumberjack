@@ -4,7 +4,7 @@ This is a Wordpress starter theme based on Timber's starter theme, which uses Tw
 
 ![Lumberjack Wordpress starter theme](http://www.adamtom.at/app/uploads/2015/10/lumberjack.jpg "Lumberjack Wordpress starter theme")
 
-_By Adam Tomat ([@adamtomat](http://twitter.com/adamtomat)) and Joe Lambert ([@joelambert](http://twitter.com/joelambert)) at Rareloop ([@rareloop](twitter.com/rareloop))_
+_By Adam Tomat ([@adamtomat](http://twitter.com/adamtomat)) and Joe Lambert ([@joelambert](http://twitter.com/joelambert)) at Rareloop ([@rareloop](twitter.com/rareloop)). Axe logo by Mete Eraydın from the Noun Project_
 
 The theme works best when used with Bedrock.
 
