@@ -4,6 +4,8 @@ This is a Wordpress starter theme based on Timber's starter theme, which uses Tw
 
 ![Lumberjack Wordpress starter theme](http://www.adamtom.at/app/uploads/2015/10/lumberjack.jpg "Lumberjack Wordpress starter theme")
 
+_By Adam Tomat ([@adamtomat](http://twitter.com/adamtomat)) and Joe Lambert ([@joelambert](http://twitter.com/joelambert)) at Rareloop ([@rareloop](twitter.com/rareloop))_
+
 The theme works best when used with Bedrock.
 
 - Timber: https://github.com/jarednova/timber/wiki/Timber-docs
