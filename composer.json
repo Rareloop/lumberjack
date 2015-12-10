@@ -1,0 +1,24 @@
+{
+    "name": "rareloop/lumberjack",
+    "license": "MIT",
+    "type": "wordpress-theme",
+    "description": "Lumberjack WordPress starter theme",
+    "authors": [
+        {
+            "name": "Adam Tomat",
+            "email": "adam.tomat@rareloop.com",
+            "homepage": "http://rareloop.com"
+        },
+        {
+            "name": "Joe Lambert",
+            "email": "joe@rareloop.com",
+            "homepage": "http://rareloop.com"
+        }
+    ],
+    "keywords": [
+        "lumberjack", "composer", "wordpress", "wp", "theme", "timber", "twig", "mvc", "dry"
+    ],
+    "require": {
+        "composer/installers": "^1.0"
+    }
+}
