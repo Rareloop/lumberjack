@@ -14,7 +14,7 @@ The theme works best when used with Bedrock.
 
 When researching, we came across this awesome [Timber Starter Theme](https://github.com/Upstatement/timber-starter-theme) by [Upstatement](http://upstatement.com/). I want to give them credit and thanks as I used their controller logic (e.g. `page.php`) in Lumberjack. Cheers!
 
-For more detailed information, see [Supercharging WordPress with Lumberjack](http://www.adamtom.at/articles/supercharging-…ith-lumberjack/)
+For more detailed information, see [Supercharging WordPress with Lumberjack](http://www.adamtom.at/articles/supercharging-wordpress-with-lumberjack/)
 
 ## Requirements
 
