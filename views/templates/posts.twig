@@ -13,7 +13,7 @@
                 {% for post in posts %}
                     <li class="posts__item">
                         <article class="post">
-                            <h1><a href="{{ post.permalink }}">{{ post.title }}</a></h1>
+                            <h1><a href="{{ post.link }}">{{ post.title }}</a></h1>
                             <div>
                                 {{ post.content|raw }}
                             </div>
