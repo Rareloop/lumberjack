@@ -18,6 +18,8 @@ For more detailed information, see [Supercharging WordPress with Lumberjack](htt
 
 ## Requirements
 
+If upgrading from Timber 0.12 see Timber's upgrade guide here: [https://github.com/timber/timber/wiki/1.0-Upgrade-Guide](https://github.com/timber/timber/wiki/1.0-Upgrade-Guide)
+
 - PHP >=5.4
 - Timber >= 1.1
 
