@@ -2,8 +2,8 @@
 
 namespace Lumberjack\PostTypes;
 
-use Timber;
-use TimberPost;
+use Timber\Timber;
+use Timber\Post as TimberPost;
 
 class Post extends TimberPost
 {

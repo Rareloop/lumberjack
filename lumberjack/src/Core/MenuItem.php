@@ -2,7 +2,7 @@
 
 namespace Lumberjack\Core;
 
-use TimberMenuItem;
+use Timber\MenuItem as TimberMenuItem;
 
 class MenuItem extends TimberMenuItem
 {

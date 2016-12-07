@@ -2,8 +2,8 @@
 
 namespace Lumberjack\Core;
 
-use TimberSite;
-use TimberHelper;
+use Timber\Site as TimberSite;
+use Timber\Helper as TimberHelper;
 use Lumberjack\Core\Menu;
 
 class Site extends TimberSite

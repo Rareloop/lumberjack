@@ -21,6 +21,7 @@
  * @since    Timber 0.1
  */
 
+use Timber\Timber;
 use Lumberjack\PostTypes\Post;
 
 $context = Timber::get_context();

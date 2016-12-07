@@ -3,6 +3,7 @@
 Template Name: Home Page Template
 */
 
+use Timber\Timber;
 use Lumberjack\PostTypes\Post;
 
 $context = Timber::get_context();

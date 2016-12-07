@@ -8,6 +8,9 @@
  * @subpackage  Timber
  * @since    Timber 0.1
  */
+
+use Timber\Timber;
+
 $context = Timber::get_context();
 
 $context['pageHeading'] = ['title' => 'Page Not Found'];

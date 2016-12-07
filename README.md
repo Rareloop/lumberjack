@@ -19,7 +19,7 @@ For more detailed information, see [Supercharging WordPress with Lumberjack](htt
 ## Requirements
 
 - PHP >=5.4
-- Timber >= 0.21.9
+- Timber >= 1.1
 
 ## Features
 
@@ -67,7 +67,7 @@ It will attempt to load a class under the `Lumberjack` namespace only. If you ne
 
 **src/Core**
 
-These classes are the bread and butter of Lumberjack and contain the base classes used throughout the theme. Typically, they’ll extend Timber too. The main file here is `Core/Site.php`, which extends `TimberSite`. This lets us add our own data to the global context and bring in any Twig extensions if needed.
+These classes are the bread and butter of Lumberjack and contain the base classes used throughout the theme. Typically, they’ll extend Timber too. The main file here is `Core/Site.php`, which extends `Timber\Site`. This lets us add our own data to the global context and bring in any Twig extensions if needed.
 
 When creating new classes in this directory, ensure they are under the `Lumberjack\Core` namespace. We're using static methods on these classes for 1 main reason:
 
@@ -91,7 +91,7 @@ Taking `CustomPostTypes` as an example, it has a `register()` method which simpl
 
 **src/PostTypes**
 
-If you have defined any custom post types in `Lumberjack\Config\CustomPostTypes`, you'll need to create a new class here. There's already a `Post.php` class which extends Timber's [TimberPost](https://github.com/jarednova/timber/wiki/TimberPost).
+If you have defined any custom post types in `Lumberjack\Config\CustomPostTypes`, you'll need to create a new class here. There's already a `Post.php` class which extends Timber's [Timber\Post](http://timber.github.io/timber/#timber-post).
 
 These files act like **models**, in as much as they should be the single point of access when interacting with the post type.
 
@@ -100,13 +100,13 @@ Because we're using Timber and Twig, we need to ensure our custom post type is a
 ```php
 // Getting a single post
 // You can optionally pass in a Post ID too, which will do a query
-$context['post'] = new TimberPost(); // Create a new object to work with an existing WordPress post. When inside the loop you can safely use no arguments. Timber will figure out what post you're talking about based on the magic of WordPress
+$context['post'] = new Timber\Post(); // Create a new object to work with an existing WordPress post. When inside the loop you can safely use no arguments. Timber will figure out what post you're talking about based on the magic of WordPress
 
 // Getting posts (optionally pass in a WP_QUERY)
-$context['posts'] = Timber::get_posts(); // Grab posts from the_loop
+$context['posts'] = Timber\Timber::get_posts(); // Grab posts from the_loop
 ```
 
-This works fine, but say you have a method on a custom post type that you want to use in your view (e.g. `getInitials()` that returns an employees initials). By default, `TimberPost` available in every view. But we can overwrite this by telling `Timber::get_posts()` we want it to return a new class for each post returned. This means that we can use our **Employee** model in our view instead of **TimberPost** - which has the `getInitials()` method available.
+This works fine, but say you have a method on a custom post type that you want to use in your view (e.g. `getInitials()` that returns an employees initials). By default, `Timber\Post` available in every view. But we can overwrite this by telling `Timber\Timber::get_posts()` we want it to return a new class for each post returned. This means that we can use our **Employee** model in our view instead of **Timber\Post** - which has the `getInitials()` method available.
 
 `Lumberjack\PostTypes\Post` is set up to do this for us already. We've also added methods which will get you all posts or let you search for posts. For example, we can now do this:
 

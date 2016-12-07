@@ -1,5 +1,7 @@
 <?php
 
+use Timber\Timber;
+
 // Timber::$cache = true;
 
 Timber::$dirname = [

@@ -7,6 +7,7 @@
  * @since    Timber 0.1
  */
 
+use Timber\Timber;
 use Lumberjack\PostTypes\Project;
 
 $context = Timber::get_context();
