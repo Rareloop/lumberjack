@@ -3,7 +3,7 @@
 namespace Lumberjack\Core;
 
 use Timber\Site as TimberSite;
-use Timber\Helper as TimberHelper;
+use Timber\FunctionWrapper as FunctionWrapper;
 use Lumberjack\Core\Menu;
 
 class Site extends TimberSite
@@ -23,7 +23,7 @@ class Site extends TimberSite
         $data['is_logged_in'] = is_user_logged_in();
 
         // Get the page title, and prefix it with ' | ' if it exists (for use in html title)
-        $data['wp_title'] = TimberHelper::function_wrapper('wp_title', ['|', false, 'right']);
+        $data['wp_title'] = new FunctionWrapper('wp_title', ['|', false, 'right']);
 
         // In Timber, you can use TimberMenu() to make a standard Wordpress menu available to the
         // Twig template as an object you can loop through. And once the menu becomes available to
