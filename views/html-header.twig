@@ -1,13 +1,10 @@
 <head>
-    <title>{{ wp_title }}{{ site.name }}</title>
+    <title>{{ function('wp_title') }}</title>
     <meta charset="{{ site.charset }}" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    {# <link media="screen, handheld" href="{{ site.theme.link }}/assets/css/style.min.css" type="text/css" rel="stylesheet"> #}
-
     <link rel="pingback" href="{{ site.pingback_url }}" />
 
-    {{function('wp_head')}}
+    {{ function('wp_head') }}
 </head>

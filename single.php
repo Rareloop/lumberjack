@@ -2,23 +2,25 @@
 
 /**
  * The Template for displaying all single posts
- *
- * Methods for TimberHelper can be found in the /lib sub-directory
- *
- * @package  WordPress
- * @subpackage  Timber
- * @since    Timber 0.1
  */
 
+namespace App;
+
+use Rareloop\Lumberjack\Http\Responses\TimberResponse;
+use Rareloop\Lumberjack\Post;
 use Timber\Timber;
-use Lumberjack\PostTypes\Post;
 
-$context = Timber::get_context();
-$post = new Post();
+class SingleController
+{
+    public function handle()
+    {
+        $context = Timber::get_context();
+        $post = new Post();
 
-$context['post'] = $post;
+        $context['post'] = $post;
+        $context['title'] = $post->title;
+        $context['content'] = $post->content;
 
-$context['title'] = $post->title;
-$context['content'] = $post->content;
-
-Timber::render(['generic-page.twig'], $context);
+        return new TimberResponse('templates/generic-page.twig', $context);
+    }
+}

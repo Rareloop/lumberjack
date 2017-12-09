@@ -1,13 +1,12 @@
 <?php
 
-namespace Lumberjack\Core;
+namespace App\Menu;
 
 use Timber\MenuItem as TimberMenuItem;
 
-class MenuItem extends TimberMenuItem
+class Item extends TimberMenuItem
 {
-    public $PostClass = 'Lumberjack\PostTypes\Post';
-
+    public $PostClass = 'Rareloop\Lumberjack\Post';
     public $listItemClass = 'page-list__item';
 
     public function __construct($data)

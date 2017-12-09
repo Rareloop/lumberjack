@@ -6,30 +6,25 @@
  * Please note that this is the WordPress construct of pages
  * and that other 'pages' on your WordPress site will use a
  * different template.
- *
- * To generate specific templates for your pages you can use:
- * /mytheme/views/page-mypage.twig
- * (which will still route through this PHP file)
- * OR
- * /mytheme/page-mypage.php
- * (in which case you'll want to duplicate this file and save to the above path)
- *
- * Methods for TimberHelper can be found in the /lib sub-directory
- *
- * @package  WordPress
- * @subpackage  Timber
- * @since    Timber 0.1
  */
 
+namespace App;
+
+use Rareloop\Lumberjack\Http\Responses\TimberResponse;
+use Rareloop\Lumberjack\Page;
 use Timber\Timber;
-use Lumberjack\PostTypes\Post;
 
-$context = Timber::get_context();
-$post = new Post();
+class PageController
+{
+    public function handle()
+    {
+        $context = Timber::get_context();
+        $page = new Page();
 
-$context['post'] = $post;
+        $context['post'] = $page;
+        $context['title'] = $page->title;
+        $context['content'] = $page->content;
 
-$context['title'] = $post->title;
-$context['content'] = $post->content;
-
-Timber::render(['generic-page.twig'], $context);
+        return new TimberResponse('templates/generic-page.twig', $context);
+    }
+}

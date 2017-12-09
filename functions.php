@@ -1,12 +1,16 @@
 <?php
 
-use Timber\Timber;
+use App\Http\Lumberjack;
 
-// Timber::$cache = true;
+// Create the Application Container
+$app = require_once('bootstrap/app.php');
 
-Timber::$dirname = [
-    'views',
-    'views/templates',
-];
+// Bootstrap Lumberjack from the Container
+$lumberjack = $app->make(Lumberjack::class);
+$lumberjack->bootstrap();
 
-require_once('lumberjack/bootstrap.php');
+// Import our routes file
+require_once('routes.php');
+
+// Set global params in the Timber context
+add_filter('timber_context', [$lumberjack, 'addToContext']);
