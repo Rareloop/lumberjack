@@ -1,4 +1,4 @@
-> This is an in development version and not yet stable
+> This version is in development and not yet stable
 
 # Lumberjack
 A framework for making WordPress theme development more sane & easier to maintain.
