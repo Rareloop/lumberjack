@@ -25,7 +25,7 @@ The framework has been designed to be as un-intrusive as possible and you're fre
 - Installation via Composer (e.g. Bedrock)
 
 ## Installing
-Download this theme to your composer powered WordPress theme and then install the core framework dependency:
+Download this theme to your Composer powered WordPress setup and then install the core framework dependency:
 
 ```shell
 composer require rareloop/lumberjack-core
