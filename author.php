@@ -8,24 +8,30 @@
  * @subpackage  Timber
  * @since    Timber 0.1
  */
-global $wp_query;
 
+namespace App;
+
+use Rareloop\Lumberjack\Http\Responses\TimberResponse;
+use Rareloop\Lumberjack\Post;
 use Timber\Timber;
 use Timber\User as TimberUser;
-use Lumberjack\PostTypes\Post;
 
-$data = Timber::get_context();
+class AuthorController
+{
+    public function handle()
+    {
+        global $wp_query;
 
-if (isset($wp_query->query_vars['author'])) {
-    $author = new TimberUser($wp_query->query_vars['author']);
+        $data = Timber::get_context();
+        $author = new TimberUser($wp_query->query_vars['author']);
 
-    $data['author'] = $author;
-    $data['title'] = 'Author Archives: '.$author->name();
+        $data['author'] = $author;
+        $data['title'] = 'Author Archives: '.$author->name();
 
-    $data['posts'] = Post::query([
-        'author' => $author->ID
-    ]);
+        $data['posts'] = Post::query([
+            'author' => $author->ID
+        ]);
+
+        return new TimberResponse('templates/posts.twig', $data);
+    }
 }
-
-
-Timber::render(['author.twig', 'posts.twig', 'generic-page.twig'], $data);
