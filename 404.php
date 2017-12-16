@@ -9,11 +9,18 @@
  * @since    Timber 0.1
  */
 
+namespace App;
+
+use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use Timber\Timber;
 
-$context = Timber::get_context();
-
-$context['pageHeading'] = ['title' => 'Page Not Found'];
-$context['content'] = '<p>We\'re sorry but the page you\'re looking for can\'t be found.</p>';
-
-Timber::render(['404.twig', 'generic-page.twig'], $context);
+/**
+ * Class names can not start with a number so the 404 controller has a special cased name
+ */
+class Error404Controller
+{
+    public function handle()
+    {
+        return new TimberResponse('templates/errors/404.twig', [], 404);
+    }
+}
