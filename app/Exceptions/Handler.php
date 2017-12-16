@@ -5,6 +5,10 @@ namespace App\Exceptions;
 use Exception;
 use Psr\Http\Message\ResponseInterface;
 use Rareloop\Lumberjack\Exceptions\Handler as LumberjackHandler;
+use Rareloop\Lumberjack\Facades\Config;
+use Rareloop\Lumberjack\Facades\Log;
+use Rareloop\Lumberjack\Http\Responses\TimberResponse;
+use Timber\Timber;
 use Zend\Diactoros\ServerRequest;
 
 class Handler extends LumberjackHandler
@@ -18,6 +22,19 @@ class Handler extends LumberjackHandler
 
     public function render(ServerRequest $request, Exception $e) : ResponseInterface
     {
+        // Provide a customisable error rendering when not in debug mode
+        try {
+            if (Config::get('app.debug') === false) {
+                $data = Timber::get_context();
+                $data['exception'] = $e;
+
+                return new TimberResponse('templates/errors/whoops.twig', $data, 500);
+            }
+        } catch (Exception $customRenderException) {
+            // Something went wrong in the custom renderer, log it and show the default rendering
+            Log::error($customRenderException);
+        }
+
         return parent::render($request, $e);
     }
 }
