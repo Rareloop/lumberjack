@@ -17,6 +17,7 @@ Written & maintained by the team at [Rareloop](https://www.rareloop.com).
 - Logging (PSR3)
 - Service Providers
 - Facades
+- Exceptions
 
 The framework has been designed to be as un-intrusive as possible and you're free to use as little or as much of it as you'd like.
 
@@ -100,10 +101,13 @@ $gateway = $app->make('\MyNamespace\PaymentGateway');
 
 
 ## Configuration
+TODO
 
 ## Post Types
+TODO
 
 ## Actions & Filters
+TODO
 
 ## Router
 The Lumberjack Router is based on the standalone [Rareloop Router](https://github.com/Rareloop/router) but utilised a Facade to make setup and access simpler.
@@ -188,6 +192,7 @@ Router::group('prefix', function ($group) {
 ```
 
 ### Middleware
+TODO
 
 #### Route based middleware
 #### Global middleware
@@ -195,6 +200,7 @@ Router::group('prefix', function ($group) {
 ## Controllers
 
 ### WordPress Controllers
+TODO
 
 ### Route Controllers
 If you'd rather use a class to group related route actions together you can pass a Controller String to `map()` instead of a closure. The string takes the format `{name of class}@{name of method}`. It is important that you use the complete namespace with the class name.
@@ -218,8 +224,10 @@ Router::map(['GET'], 'route/uri', '\MyNamespace\TestController@testMethod');
 ```
 
 ## Logging (PSR3)
+TODO
 
 ## Service Providers
+TODO
 
 ## Facades
 Lumberjack uses the [Blast Facades](https://github.com/phpthinktank/blast-facades) library.
@@ -260,3 +268,6 @@ class Log extends AbstractFacade
     }
 }
 ```
+
+## Exceptions
+TODO
