@@ -6,40 +6,38 @@
  * For example, puts together date-based pages if no date.php file exists.
  *
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
- *
- * Methods for TimberHelper can be found in the /lib sub-directory
- *
- * @package  WordPress
- * @subpackage  Timber
- * @since   Timber 0.2
  */
 
+namespace App;
+
+use Rareloop\Lumberjack\Http\Responses\TimberResponse;
+use Rareloop\Lumberjack\Post;
 use Timber\Timber;
-use Lumberjack\PostTypes\Post;
 
-$templates = ['posts.twig', 'generic-page.twig'];
+class ArchiveController
+{
+    public function handle()
+    {
+        $data = Timber::get_context();
+        $data['title'] = 'Archive';
 
-$data = Timber::get_context();
+        if (is_day()) {
+            $data['title'] = 'Archive: '.get_the_date('D M Y');
+        } elseif (is_month()) {
+            $data['title'] = 'Archive: '.get_the_date('M Y');
+        } elseif (is_year()) {
+            $data['title'] = 'Archive: '.get_the_date('Y');
+        } elseif (is_tag()) {
+            $data['title'] = single_tag_title('', false);
+        } elseif (is_category()) {
+            $data['title'] = single_cat_title('', false);
+        } elseif (is_post_type_archive()) {
+            $data['title'] = post_type_archive_title('', false);
+        }
 
-$data['title'] = 'Archive';
+        // TODO: Currently only works for posts, fix for custom post types
+        $data['posts'] = Post::query();
 
-if (is_day()) {
-    $data['title'] = 'Archive: '.get_the_date('D M Y');
-} elseif (is_month()) {
-    $data['title'] = 'Archive: '.get_the_date('M Y');
-} elseif (is_year()) {
-    $data['title'] = 'Archive: '.get_the_date('Y');
-} elseif (is_tag()) {
-    $data['title'] = single_tag_title('', false);
-} elseif (is_category()) {
-    $data['title'] = single_cat_title('', false);
-    array_unshift($templates, 'archive-'.get_query_var('cat').'.twig');
-} elseif (is_post_type_archive()) {
-    $data['title'] = post_type_archive_title('', false);
-    array_unshift($templates, 'archive-'.get_post_type().'.twig');
+        return new TimberResponse('templates/posts.twig', $data);
+    }
 }
-
-// TODO: Currently only works for posts, fix for custom post types
-$data['posts'] = Post::query();
-
-Timber::render($templates, $data);
