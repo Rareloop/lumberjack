@@ -23,8 +23,18 @@ return [
         Rareloop\Lumberjack\Providers\MenusServiceProvider::class,
         Rareloop\Lumberjack\Providers\LogServiceProvider::class,
         Rareloop\Lumberjack\Providers\ThemeSupportServiceProvider::class,
+        Rareloop\Lumberjack\Providers\LogServiceProvider::class,
     ],
-
+    
+    /**
+    * Logs enabled, path and level
+    */
+    'logs' => [
+        'enabled' => false,
+        'path' => get_template_directory().'/app.log',
+        'level' => Monolog\Logger::Error,
+    ],
+    
     'themeSupport' => [
         'post-thumbnail',
     ],
