@@ -36,6 +36,6 @@ return [
     ],
     
     'themeSupport' => [
-        'post-thumbnail',
+        'post-thumbnails',
     ],
 ];
