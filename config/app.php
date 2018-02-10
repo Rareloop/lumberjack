@@ -31,8 +31,8 @@ return [
     */
     'logs' => [
         'enabled' => false,
-//         'path' => get_template_directory().'/app.log',
-//         'level' => Monolog\Logger::Error,
+        'path' => get_template_directory().'/app.log',
+        'level' => Monolog\Logger::ERROR,
     ],
     
     'themeSupport' => [
