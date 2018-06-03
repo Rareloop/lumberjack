@@ -1,6 +1,8 @@
 # Lumberjack
 A framework for making WordPress theme development more sane & easier to maintain.
 
+The framework has been designed to be as un-intrusive as possible and you're free to use as little or as much of it as you'd like.
+
 Written & maintained by the team at [Rareloop](https://www.rareloop.com).
 
 ## Features
@@ -17,14 +19,16 @@ Written & maintained by the team at [Rareloop](https://www.rareloop.com).
 - Facades
 - Exceptions
 
-The framework has been designed to be as un-intrusive as possible and you're free to use as little or as much of it as you'd like.
-
 ## Requirements
 - PHP >=7.0
 - Installation via Composer (e.g. Bedrock)
 
 ## Installing
-Download this theme to your Composer powered WordPress setup and then install the core framework dependency:
+This repository is a starter theme. To get started you should **download this and add it to your `themes/` directory**.
+
+_(Note: Currently using a child-theme to extend this theme is unsupported.)_
+
+The theme depends on the core Lumberjack framework. Install this via composer, like so:
 
 ```shell
 composer require rareloop/lumberjack-core
@@ -97,12 +101,209 @@ $gateway = $app->make('\MyNamespace\PaymentGateway');
 // $gateway is instance of '\MyNamespace\StripePaymentGateway'
 ```
 
-
 ## Configuration
-TODO
+
+Lumberjack comes with a selection of config files out-of-the-box. These live in the `config/` directory and are simple `.php` files that return an `array`.
+
+### Accessing Configuration Values
+
+Let's take a look at `config/app.php`:
+
+```php
+return [
+    /**
+     * The current application environment
+     */
+    'environment' => getenv('WP_ENV'),
+
+    // ...etc
+];
+```
+
+Here we are proxying an environment variable defined in the `.env` file that Bedrock provides. We'd recommend following this pattern, where you should only see `getenv` called in your config files.
+
+You can easily access the environment variable using the `Rareloop\Lumberjack\Facades\Config` facade.
+
+```php
+use Rareloop\Lumberjack\Facades\Config;
+
+$env = Config::get('app.environment');
+```
+
+You can provide a default value too, incase the configuration option does not exist.
+
+```php
+$env = Config::get('app.environment', 'production');
+```
+
+If you need to update a config option, you can use the `set` method, like so:
+
+```php
+Config::set('app.debug', false);
+```
+
+### Adding your own config files
+
+Chances are, you're going to need to add your own config files at some point. All you need to do is create a new `.php` file in the `config/` directory, and have it return an array.
+
+This works because Lumberjack will look for all files in the `config/` directory that have a `.php` extention and automatically registers all the data to the application's config.
 
 ## Post Types
-TODO
+
+Typically in WordPress when you're querying posts you get [`WP_Post`](https://codex.wordpress.org/Class_Reference/WP_Post) objects back. Timber have taken this a step further and return a `Timber/Post` object instead. This [has a ton of great helper methods and properties](https://timber.github.io/docs/reference/timber-post/) which makes it easier and more expressive to use.
+
+```php
+use Timber\Post;
+
+$post = new Post(1);
+$posts = Timber::get_posts($wpQueryArray);
+```
+
+Lumberjack has its own Post object which makes it easier and more expressive to run queries.
+
+```php
+use Rareloop\Lumberjack\Post;
+
+$post = new Post(1);
+$collection = Post::query($wpQueryArray);
+```
+
+This becomes especially powerful when you start registering **Custom Post Types**.
+
+
+```php
+use App\PostTypes\Product;
+
+$post = new Product(1);
+$collection = Product::query($wpQueryArray);
+```
+
+In this example `$collection` contains `App\PostType\Product` objects. That allows you to add your own methods to a product and encapsulate logic in one place.
+
+```php
+use App\PostTypes\Product;
+
+$collection = Product::query($wpQueryArray);
+
+foreach ($collection as $product) {
+    echo $product->price();
+}
+```
+
+```php
+namespace App\PostTypes;
+
+use Rareloop\Lumberjack\Post;
+
+class Product extends Post
+{
+    // ...
+
+    public function price()
+    {
+        // Get the price from the ACF field for this product
+        return get_field('price', $this->id);
+    }
+}
+```
+
+### Register Custom Post Types
+
+First, create a new file in `app/PostTypes/`. We recommend using singular names. For this example, lets add a `Product.php` file there.
+
+You can use this boilerplate to get you started:
+
+```php
+<?php
+
+namespace App\PostTypes;
+
+use Rareloop\Lumberjack\Post;
+use Rareloop\Lumberjack\QueryBuilder\Post as QueryBuilderPost;
+
+class Product extends Post
+{
+    /**
+     * Return the key used to register the post type with WordPress
+     * First parameter of the `register_post_type` function:
+     * https://codex.wordpress.org/Function_Reference/register_post_type
+     *
+     * @return string
+     */
+    public static function getPostType()
+    {
+        return 'products';
+    }
+
+    /**
+     * Return the config to use to register the post type with WordPress
+     * Second parameter of the `register_post_type` function:
+     * https://codex.wordpress.org/Function_Reference/register_post_type
+     *
+     * @return array|null
+     */
+    protected static function getPostTypeConfig()
+    {
+        return [
+            'labels' => [
+                'name' => __('Products'),
+                'singular_name' => __('Product'),
+                'add_new_item' => __('Add New Product'),
+            ],
+        ];
+    }
+}
+```
+
+Lumberjack will handle the registering of the post type for you. In order to do that, it requires 2 methods (documented above):
+
+- `getPostType()`
+- `getPostTypeConfig()`
+
+In order for Lumberjack to register your post type, you need to add the class name to the `config/posttypes.php` config file.
+
+```php
+return [
+    /**
+     * List all the sub-classes of Rareloop\Lumberjack\Post in your app that you wish to
+     * automatically register with WordPress as part of the bootstrap process.
+     */
+    'register' => [
+        App\PostTypes\Product::class,
+    ],
+];
+```
+
+And that's it! You can now start using your new Custom Post Type.
+
+#### Tip:
+
+Try and avoid using ACF's `get_field` outside of a Post Type class. This will help make your application easy to change.
+
+```php
+$product = new Product;
+
+// Bad
+echo get_field('price', $product->id);
+
+// Good: The knowledge of how to get the price is encapsulated within the Product class
+echo $product->price();
+```
+
+### Available Methods for `Rareloop\Lumberjack\Post`
+
+Lumberjack's `Post` class extends `Timber\Post`, and adds some convenient methods for you:
+
+```php
+use Rareloop\Lumberjack\Post;
+use Rareloop\Lumberjack\Product;
+
+// Get all published posts, ordered by ascending title
+$posts = Post::all(10, 'title', 'asc');
+
+// Accepts the WP_Query args as an array. By default it will filter by published posts for the correct post type too
+$products = Product::query(['s' => 'Toy Car']);
+```
 
 ## Actions & Filters
 TODO
@@ -113,6 +314,9 @@ The Lumberjack Router is based on the standalone [Rareloop Router](https://githu
 Note: Route closures and controller functions are automatically dependency injected from the container.
 
 ### HTTP Request/Response Messages
+
+// TODO
+
 ### Creating Routes
 
 #### Map
