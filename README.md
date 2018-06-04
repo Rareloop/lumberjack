@@ -6,18 +6,17 @@ The framework has been designed to be as un-intrusive as possible and you're fre
 Written & maintained by the team at [Rareloop](https://www.rareloop.com).
 
 ## Features
-- Dependency Injection Container (PSR11)
 - Configuration
 - Post Types
-- Actions & Filters
+- WordPress Controllers
 - Router
-  - HTTP Request/Response Messages (PSR7)
   - Middleware (PSR15)
-- Controllers
+- HTTP Request/Response Messages (PSR7)
 - Logging (PSR3)
+- Exceptions
+- Dependency Injection Container (PSR11)
 - Service Providers
 - Facades
-- Exceptions
 
 ## Requirements
 - PHP >=7.0
@@ -32,73 +31,6 @@ The theme depends on the core Lumberjack framework. Install this via composer, l
 
 ```shell
 composer require rareloop/lumberjack-core
-```
-
-## Dependency Injection Container
-Lumberjack features a PSR11 compatible container, powered by the popular open source [PHPDI](http://php-di.org). If this is a new term for you checkout this [great intro](http://php-di.org/doc/understanding-di.html) and don't worry, you don't have to make use of it if you don't want to.
-
-## Accessing the container
-In the default Lumberjack `functions.php` you'll find the following code:
-
-```php
-$app = new Application(__DIR__);
-```
-
-This creates the Application and the `$app` variable becomes your reference to the container.
-
-### Setting entries in the container
-To add something to the container you simply call `bind()`, e.g.:
-
-```php
-$app->bind('foo', 'bar');
-```
-
-### Retrieving entries from the container
-To retrieve an entry from the container you can use `get()`, e.g.:
-
-```php
-$foo = $app->get('foo');
-```
-
-### Use the container to create an object
-You can use the container to create an object from any class that your application can autoload using `make()`, e.g.:
-
-```php
-$comment = $app->make('\MyNamespace\Comment');
-```
-
-When creating an object using `make`, all the dependencies required by it's `__construct()` function will be automatically resolved from the container using type hinting. If your object requires additional parameters that can not resolved by type hinting you can pass them as a second param, e.g.:
-
-```php
-namespace MyNamespace;
-
-class Comment
-{
-  public function __construct(ClassInContainer $resolvable, $param1, $param2) {}
-}
-
-...
-
-$comment = $app->make('\MyNamespace\Comment', [
-  'param1' => 123,
-  'param2' => 'abc',
-]);
-```
-
-### Set concrete implementations for interfaces
-You can also tell the container what concrete class to use when resolving a certain type hinted interface. This allows you to write your app code against contracts and then use the container to switch in the correct implementation at runtime.
-
-```php
-namespace MyNamespace;
-
-interface PaymentGateway {}
-
-class StripePaymentGateway implements PaymentGateway{}
-
-$app->set('\MyNamespace\PaymentGateway', '\MyNamespace\StripePaymentGateway');
-
-$gateway = $app->make('\MyNamespace\PaymentGateway');
-// $gateway is instance of '\MyNamespace\StripePaymentGateway'
 ```
 
 ## Configuration
@@ -303,8 +235,68 @@ $posts = Post::all(10, 'title', 'asc');
 $products = Product::query(['s' => 'Toy Car']);
 ```
 
-## Actions & Filters
-TODO
+## WordPress Controllers
+
+In the files (i.e. controllers) that WordPress uses when it matches a route (e.g. `page.php`, `single.php`), you can now use a class rather than writing procedural code.
+
+```php
+// page-home.php
+
+/*
+ * Template Name: Home Template
+ */
+
+namespace App;
+
+use Timber\Timber;
+use Rareloop\Lumberjack\Post;
+use App\Http\Responses\TimberResponse;
+
+class PageHomeController
+{
+    public function handle()
+    {
+        $context = Timber::get_context();
+
+        $context['post'] = new Post;
+
+        return new TimberResponse('home', $context);
+    }
+}
+```
+
+**The name of the controller is important:**
+
+- It should be under the namespace `App`.
+- The class name must be an UpperCamelCase version of the filename with the word `Controller` on the end (without spaces, dashes and underscores). If the controller name is not correctly Lumberjack will not throw any errors - instead you will just get a blank page.
+
+The `handle` method will automatically be called on your controller.
+
+### Changing the naming convention
+
+If you wish to change how Lumberjack looks for controller class names, you can hook into the `lumberjack_controller_name` filter.
+
+```php
+add_filter('lumberjack_controller_name', function ($controllerName) {
+    // e.g. Look for 'HomeController' instead of 'PageHomeController'
+    return str_replace('Page', '', $controllerName);
+});
+```
+
+Or if you wish to change the namespace you can use the `lumberjack_controller_namespace` filter.
+
+```php
+add_filter('lumberjack_controller_namespace', function ($controllerName) {
+    // e.g. Look for 'MyApp\PageHomeController' instead of 'App\PageHomeController'
+    return 'MyApp\\'
+});
+```
+
+### Controller for the 404 page
+
+In WordPress, you have a `404.php` file. `PHP` Classes cannot start with a number so following the usual naming convention will not work here.
+
+Instead Lumberjack will look for a controller called `Error404Controller`
 
 ## Router
 
@@ -413,18 +405,16 @@ Router::map(['GET', 'POST'], 'posts/list', function () {
 - `action`  (function|string): Either a closure or a Controller string
 
 ### Middleware
-
 _TODO: If you'd like to know more about this, please add an issue._
 
 #### Route based middleware
 
-_TODO: If you'd like to know more about this, please add an issue._
-
 #### Global middleware
-
 _TODO: If you'd like to know more about this, please add an issue._
 
 ## HTTP Request/Response Messages
+
+_TODO: Request documentation. If you'd like to know more about this, please add an issue._
 
 All of your WordPress and Router controllers should return PSR7 compliant response. The most common use-case is rendering a `twig` view and passing in some context. Using Timber it would look like this:
 
@@ -477,74 +467,81 @@ $response = new Zend\Diactoros\Response\EmptyResponse(); // Basic 204 response:
 $response = new Zend\Diactoros\Response\RedirectResponse('/user/login');
 ```
 
-## WordPress Controllers
-
-In the files (i.e. controllers) that WordPress uses when it matches a route (e.g. `page.php`, `single.php`), you can now use a class rather than writing procedural code.
-
-```php
-// page-home.php
-
-/*
- * Template Name: Home Template
- */
-
-namespace App;
-
-use Timber\Timber;
-use Rareloop\Lumberjack\Post;
-use App\Http\Responses\TimberResponse;
-
-class PageHomeController
-{
-    public function handle()
-    {
-        $context = Timber::get_context();
-
-        $context['post'] = new Post;
-
-        return new TimberResponse('home', $context);
-    }
-}
-```
-
-**The name of the controller is important:**
-
-- It should be under the namespace `App`.
-- The class name must be an UpperCamelCase version of the filename with the word `Controller` on the end (without spaces, dashes and underscores). If the controller name is not correctly Lumberjack will not throw any errors - instead you will just get a blank page.
-
-The `handle` method will automatically be called on your controller.
-
-### Changing the naming convention
-
-If you wish to change how Lumberjack looks for controller class names, you can hook into the `lumberjack_controller_name` filter.
-
-```php
-add_filter('lumberjack_controller_name', function ($controllerName) {
-    // e.g. Look for 'HomeController' instead of 'PageHomeController'
-    return str_replace('Page', '', $controllerName);
-});
-```
-
-Or if you wish to change the namespace you can use the `lumberjack_controller_namespace` filter.
-
-```php
-add_filter('lumberjack_controller_namespace', function ($controllerName) {
-    // e.g. Look for 'MyApp\PageHomeController' instead of 'App\PageHomeController'
-    return 'MyApp\\'
-});
-```
-
-### Controller for the 404 page
-
-In WordPress, you have a `404.php` file. `PHP` Classes cannot start with a number so following the usual naming convention will not work here.
-
-Instead Lumberjack will look for a controller called `Error404Controller`
-
 ## Logging (PSR3)
-TODO
+_TODO: If you'd like to know more about this, please add an issue_
+
+## Exceptions
+_TODO: If you'd like to know more about this, please add an issue_
+
+## Dependency Injection Container
+Lumberjack features a PSR11 compatible container, powered by the popular open source [PHPDI](http://php-di.org). If this is a new term for you checkout this [great intro](http://php-di.org/doc/understanding-di.html) and don't worry, you don't have to make use of it if you don't want to.
+
+#### Accessing the container
+In the default Lumberjack `functions.php` you'll find the following code:
+
+```php
+$app = new Application(__DIR__);
+```
+
+This creates the Application and the `$app` variable becomes your reference to the container.
+
+### Setting entries in the container
+To add something to the container you simply call `bind()`, e.g.:
+
+```php
+$app->bind('foo', 'bar');
+```
+
+### Retrieving entries from the container
+To retrieve an entry from the container you can use `get()`, e.g.:
+
+```php
+$foo = $app->get('foo');
+```
+
+### Use the container to create an object
+You can use the container to create an object from any class that your application can autoload using `make()`, e.g.:
+
+```php
+$comment = $app->make('\MyNamespace\Comment');
+```
+
+When creating an object using `make`, all the dependencies required by it's `__construct()` function will be automatically resolved from the container using type hinting. If your object requires additional parameters that can not resolved by type hinting you can pass them as a second param, e.g.:
+
+```php
+namespace MyNamespace;
+
+class Comment
+{
+  public function __construct(ClassInContainer $resolvable, $param1, $param2) {}
+}
+
+...
+
+$comment = $app->make('\MyNamespace\Comment', [
+  'param1' => 123,
+  'param2' => 'abc',
+]);
+```
+
+### Set concrete implementations for interfaces
+You can also tell the container what concrete class to use when resolving a certain type hinted interface. This allows you to write your app code against contracts and then use the container to switch in the correct implementation at runtime.
+
+```php
+namespace MyNamespace;
+
+interface PaymentGateway {}
+
+class StripePaymentGateway implements PaymentGateway{}
+
+$app->set('\MyNamespace\PaymentGateway', '\MyNamespace\StripePaymentGateway');
+
+$gateway = $app->make('\MyNamespace\PaymentGateway');
+// $gateway is instance of '\MyNamespace\StripePaymentGateway'
+```
 
 ## Service Providers
-TODO
+_TODO: If you'd like to know more about this, please add an issue_
 
 ## Facades
 Lumberjack uses the [Blast Facades](https://github.com/phpthinktank/blast-facades) library.
@@ -583,6 +580,3 @@ class Log extends AbstractFacade
     }
 }
 ```
-
-## Exceptions
-TODO
