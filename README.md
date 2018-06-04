@@ -375,7 +375,7 @@ class TestController
 }
 
 // routes.php
-Router::get('route/uri', '\App\Http\Controllers@show');
+Router::get('route/uri', '\App\Http\TestController@show');
 ```
 
 #### Map
