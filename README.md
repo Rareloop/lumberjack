@@ -228,7 +228,7 @@ Lumberjack's `Post` class extends `Timber\Post`, and adds some convenient method
 use Rareloop\Lumberjack\Post;
 use Rareloop\Lumberjack\Product;
 
-// Get all published posts, ordered by ascending title
+// Get all published posts, with 10 per page, ordered ascending by title
 $posts = Post::all(10, 'title', 'asc');
 
 // Accepts the WP_Query args as an array. By default it will filter by published posts for the correct post type too
