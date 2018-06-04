@@ -353,7 +353,7 @@ It is common to group similar routes behind a common prefix. This can be achieve
 ```php
 Router::group('prefix', function ($group) {
     $group->get('route1', function () {}); // `/prefix/route1`
-    $group->get('route2', function () {}); // `/prefix/route2§`
+    $group->get('route2', function () {}); // `/prefix/route2`
 });
 ```
 
