@@ -16,6 +16,8 @@ return [
      */
     'providers' => [
         // Lumberjack Core Providers
+        Rareloop\Lumberjack\Providers\EncryptionServiceProvider::class,
+        Rareloop\Lumberjack\Providers\SessionServiceProvider::class,
         Rareloop\Lumberjack\Providers\RouterServiceProvider::class,
         Rareloop\Lumberjack\Providers\WordPressControllersServiceProvider::class,
         Rareloop\Lumberjack\Providers\TimberServiceProvider::class,
