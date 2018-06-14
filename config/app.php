@@ -15,6 +15,7 @@ return [
      * List of providers to initialise during app boot
      */
     'providers' => [
+        // Lumberjack Core Providers
         Rareloop\Lumberjack\Providers\RouterServiceProvider::class,
         Rareloop\Lumberjack\Providers\WordPressControllersServiceProvider::class,
         Rareloop\Lumberjack\Providers\TimberServiceProvider::class,
@@ -24,11 +25,14 @@ return [
         Rareloop\Lumberjack\Providers\LogServiceProvider::class,
         Rareloop\Lumberjack\Providers\ThemeSupportServiceProvider::class,
         Rareloop\Lumberjack\Providers\LogServiceProvider::class,
+
+        // Application Providers
+        App\Providers\AppServiceProvider::class,
     ],
-    
+
     /**
     * Logs enabled, path and level
-    * 
+    *
     * When path is `false` the default Apache/Nginx error logs are used. By setting path to a string, no logs will be sent
     * to the default and instead a file will be created. To disable all logging output set `enabled` to `false`.
     */
@@ -37,7 +41,7 @@ return [
         'path' => false,
         'level' => Monolog\Logger::ERROR,
     ],
-    
+
     'themeSupport' => [
         'post-thumbnails',
     ],
