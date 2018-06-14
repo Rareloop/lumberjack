@@ -221,6 +221,36 @@ class TestController
 Router::map(['GET'], 'route/uri', '\MyNamespace\TestController@testMethod');
 ```
 
+## Sessions
+The HTTP protocol is inherently stateless. If you want to maintain some data between requests, you will need to use the Session.
+
+### Configuration
+The Session is configured using the `config/session.php` file. By default Lumberjack is configured to store all session data as files on the disk.
+
+### Usage
+TODO
+
+#### Retrieving Data
+TODO
+
+#### Storing Data
+TODO
+
+#### Flash Data
+TODO
+
+#### Deleting Data
+TODO
+
+### Adding Custom Storage Drivers
+TODO
+
+#### Implement the driver
+TODO
+
+#### Register the driver
+TODO
+
 ## Logging (PSR3)
 TODO
 
