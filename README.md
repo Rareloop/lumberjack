@@ -1,4 +1,4 @@
-[![stable](https://img.shields.io/github/release/rareloop/lumberjack.svg)](https://github.com/Rareloop/lumberjack/releases)
+[![framework](https://img.shields.io/github/release/rareloop/lumberjack-core.svg)](https://github.com/Rareloop/lumberjack/releases)
 [![GitHub license](https://img.shields.io/github/license/rareloop/lumberjack.svg)](https://github.com/Rareloop/lumberjack/blob/master/LICENSE.txt)
 
 
