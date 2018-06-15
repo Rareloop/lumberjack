@@ -1,3 +1,8 @@
+
+[![stable](https://img.shields.io/github/release/rareloop/lumberjack.svg)](https://github.com/Rareloop/lumberjack/releases)
+[![GitHub license](https://img.shields.io/github/license/rareloop/lumberjack.svg)](https://github.com/Rareloop/lumberjack/blob/master/LICENSE.txt)
+
+
 # Lumberjack
 A framework for making WordPress theme development more sane & easier to maintain.
 
@@ -7,7 +12,7 @@ Written & maintained by the team at [Rareloop](https://www.rareloop.com).
 
 ## Documentation
 
-The Lumberjack documentation can be found at:
+The Lumberjack documentation can be found here:
 
 [https://docs.lumberjack.rareloop.com](https://docs.lumberjack.rareloop.com)
 
