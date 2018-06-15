@@ -15,6 +15,10 @@ The Lumberjack documentation can be found here:
 
 [https://docs.lumberjack.rareloop.com](https://docs.lumberjack.rareloop.com)
 
+If you would like to see what a Lumberjack theme looks like, check out our example repo:
+
+[https://github.com/Rareloop/lumberjack-example](https://github.com/Rareloop/lumberjack-example)
+
 ## References
 - [Bedrock](https://roots.io/bedrock/docs/installing-bedrock/)
 - [Timber](https://timber.github.io/docs/)
