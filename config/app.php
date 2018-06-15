@@ -12,6 +12,11 @@ return [
     'debug' => WP_DEBUG ?? false,
 
     /**
+     * The key used by the Encrypter. This should be a random 32 character string.
+     */
+    'key' => getenv('APP_KEY'),
+
+    /**
      * List of providers to initialise during app boot
      */
     'providers' => [
