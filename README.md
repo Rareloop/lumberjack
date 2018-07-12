@@ -1,5 +1,6 @@
 [![framework](https://img.shields.io/github/release/rareloop/lumberjack-core.svg)](https://github.com/Rareloop/lumberjack/releases)
 [![GitHub license](https://img.shields.io/github/license/rareloop/lumberjack.svg)](https://github.com/Rareloop/lumberjack/blob/master/LICENSE.txt)
+![Downloads](https://img.shields.io/packagist/dt/rareloop/lumberjack-core.svg)
 
 
 # Lumberjack
