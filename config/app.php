@@ -23,7 +23,6 @@ return [
         Rareloop\Lumberjack\Providers\MenusServiceProvider::class,
         Rareloop\Lumberjack\Providers\LogServiceProvider::class,
         Rareloop\Lumberjack\Providers\ThemeSupportServiceProvider::class,
-        Rareloop\Lumberjack\Providers\LogServiceProvider::class,
     ],
     
     /**
