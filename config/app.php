@@ -1,9 +1,9 @@
 <?php
 
 return [
-    /**
-     * The current application environment
-     */
+/**
+ * The current application environment
+ */
     'environment' => getenv('WP_ENV'),
 
     /**
@@ -23,20 +23,23 @@ return [
         Rareloop\Lumberjack\Providers\MenusServiceProvider::class,
         Rareloop\Lumberjack\Providers\LogServiceProvider::class,
         Rareloop\Lumberjack\Providers\ThemeSupportServiceProvider::class,
+        Rareloop\Lumberjack\Providers\QueryBuilderServiceProvider::class,
+        Rareloop\Lumberjack\Providers\SessionServiceProvider::class,
+        Rareloop\Lumberjack\Providers\EncryptionServiceProvider::class,
     ],
-    
+
     /**
-    * Logs enabled, path and level
-    * 
-    * When path is `false` the default Apache/Nginx error logs are used. By setting path to a string, no logs will be sent
-    * to the default and instead a file will be created. To disable all logging output set `enabled` to `false`.
-    */
+     * Logs enabled, path and level
+     *
+     * When path is `false` the default Apache/Nginx error logs are used. By setting path to a string, no logs will be sent
+     * to the default and instead a file will be created. To disable all logging output set `enabled` to `false`.
+     */
     'logs' => [
         'enabled' => true,
         'path' => false,
         'level' => Monolog\Logger::ERROR,
     ],
-    
+
     'themeSupport' => [
         'post-thumbnails',
     ],

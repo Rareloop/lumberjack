@@ -10,6 +10,6 @@ $autoloader('App\\', dirname(__DIR__) . '/app/');
 
 $app = new Application(dirname(__DIR__));
 
-$app->bind(HandlerInterface::class, $app->make(Handler::class));
+$app->singleton(HandlerInterface::class, Handler::class);
 
 return $app;

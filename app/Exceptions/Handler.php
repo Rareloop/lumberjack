@@ -9,7 +9,7 @@ use Rareloop\Lumberjack\Facades\Config;
 use Rareloop\Lumberjack\Facades\Log;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use Timber\Timber;
-use Zend\Diactoros\ServerRequest;
+use Psr\Http\Message\ServerRequestInterface;
 
 class Handler extends LumberjackHandler
 {
@@ -20,7 +20,7 @@ class Handler extends LumberjackHandler
         parent::report($e);
     }
 
-    public function render(ServerRequest $request, Exception $e) : ResponseInterface
+    public function render(ServerRequestInterface $request, Exception $e) : ResponseInterface
     {
         // Provide a customisable error rendering when not in debug mode
         try {
