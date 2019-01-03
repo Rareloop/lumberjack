@@ -1,9 +1,9 @@
 <?php
 
 return [
-/**
- * The current application environment
- */
+    /**
+     * The current application environment
+     */
     'environment' => getenv('WP_ENV'),
 
     /**
@@ -23,6 +23,19 @@ return [
         Rareloop\Lumberjack\Providers\MenusServiceProvider::class,
         Rareloop\Lumberjack\Providers\LogServiceProvider::class,
         Rareloop\Lumberjack\Providers\ThemeSupportServiceProvider::class,
+        Rareloop\Lumberjack\Providers\QueryBuilderServiceProvider::class,
+        Rareloop\Lumberjack\Providers\SessionServiceProvider::class,
+        Rareloop\Lumberjack\Providers\EncryptionServiceProvider::class,
+
+        // Application Providers
+        App\Providers\AppServiceProvider::class,
+    ],
+
+    'aliases' => [
+        'Config' => Rareloop\Lumberjack\Facades\Config::class,
+        'Log' => Rareloop\Lumberjack\Facades\Log::class,
+        'Router' => Rareloop\Lumberjack\Facades\Router::class,
+        'Session' => Rareloop\Lumberjack\Facades\Session::class,
     ],
 
     /**
@@ -40,4 +53,9 @@ return [
     'themeSupport' => [
         'post-thumbnails',
     ],
+
+    /**
+     * The key used by the Encrypter. This should be a random 32 character string.
+     */
+    'key' => getenv('APP_KEY'),
 ];
