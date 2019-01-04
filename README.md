@@ -24,15 +24,5 @@ If you would like to see what a Lumberjack theme looks like, check out our examp
 - [Bedrock](https://roots.io/bedrock/docs/installing-bedrock/)
 - [Timber](https://timber.github.io/docs/)
 
-## Requirements
-- PHP >=7.1
-- Installation via Composer (e.g. Bedrock)
-
 ## Installing
-1. This repository is a starter theme. To get started you should download this and add it to your `themes/` directory.
-
-2. The theme depends on the core Lumberjack framework. Install this via composer, like so:
-
-```shell
-composer require rareloop/lumberjack-core
-```
+See the documentation for details on how to get started: [https://docs.lumberjack.rareloop.com/getting-started/installation](https://docs.lumberjack.rareloop.com/getting-started/installation)
