@@ -25,7 +25,7 @@ If you would like to see what a Lumberjack theme looks like, check out our examp
 - [Timber](https://timber.github.io/docs/)
 
 ## Requirements
-- PHP >=7.0
+- PHP >=7.1
 - Installation via Composer (e.g. Bedrock)
 
 ## Installing
