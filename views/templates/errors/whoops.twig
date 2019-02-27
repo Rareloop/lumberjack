@@ -1,8 +1,269 @@
-{# This is the page that shows in production when an unrecoverable error occurs #}
-{% extends "base.twig" %}
+<!DOCTYPE html>
+<html {{ site.language_attributes }} class="core">
 
-{% block content %}
-    <main>
-        <h1>Whoops, looks like something went wrong.</h1>
-    </main>
-{% endblock %}
+    <head>
+        <title>{{ function('wp_title')|default('Whoops, something went wrong') }}</title>
+        <meta charset="{{ site.charset }}" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="pingback" href="{{ site.pingback_url }}" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:700,800" rel="stylesheet">
+
+        <style>
+            html {
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            *,
+            *:before,
+            *:after {
+                -webkit-box-sizing: inherit;
+                box-sizing: inherit;
+            }
+
+            html,
+            body {
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-font-smoothing: antialiased;
+                font-family: "Open Sans", sans-serif;
+                font-weight: 700;
+                color: #000;
+                color: #0f114c;
+            }
+
+            body {
+                margin: 0;
+
+                font-size: 100%;
+            }
+
+            @supports (display: flex) {
+                .right {
+                    width: 130%;
+                    height: 0;
+                    margin-left: -30%;
+                    padding-top: 143%;
+
+                    background: url({{ theme.link }}/assets/img/whoops.svg) center left;
+                    background-size: cover;
+                }
+            }
+
+            .main-content {
+                padding: 2em;
+            }
+
+            .status-code {
+                font-size: 3.75rem;
+                font-weight: 800;
+            }
+
+            .page-title {
+                margin: 0;
+
+                font-size: 1.875rem;
+                font-weight: 800;
+                letter-spacing: -1.2px;
+            }
+
+            .page-title:after {
+                content: '';
+                display: block;
+                margin: 1.5em 0;
+                width: 76px;
+                height: 5px;
+
+                background: #ff6565;
+            }
+
+            .status-message {
+                margin: 0 0 2em;
+
+                line-height: 2.2em;
+            }
+
+            .button {
+                display: block;
+                padding: 1em 0;
+                min-width: 160px;
+
+                font-family: 'Open Sans', sans-serif;
+                font-size: 1rem;
+                font-weight: 800;
+                text-align: center;
+                color: #fff;
+                text-decoration: none;
+
+                background: #0f114c;
+                border: 3px solid #0f114c;
+
+                transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+
+                cursor: pointer;
+            }
+
+            .button:hover {
+                background: #ff6565;
+                border-color: #ff6565;
+            }
+
+            .button--back {
+                margin-top: 1em;
+
+                color: #0f114c;
+
+                background: #fff;
+            }
+
+            .button--back:hover {
+                color: #ff6565;
+
+                background-color: transparent;
+                border-color: #ff6565;
+            }
+
+            .text-highlight {
+                position: relative;
+            }
+
+            .text-highlight:before {
+                content: '';
+
+                position: absolute;
+                top: 8%;
+                left: 0;
+                z-index: -1;
+
+                width: 100%;
+                height: 72%;
+
+                background: #E3E8EE;
+            }
+
+            .core .button--back {
+                display: none;
+            }
+
+            ::selection {
+                background: #ff6565;
+            }
+
+            ::-moz-selection {
+                background: #ff6565;
+            }
+
+            @media screen and (min-width: 460px) {
+                .button {
+                    display: inline-block;
+                }
+
+                .button--back {
+                    margin: 0 0 0 0.5em;
+                }
+            }
+
+            @media screen and (min-width: 900px) {
+                html {
+                    height: 100%;
+                }
+
+                body {
+                    display: flex;
+                    height: 100%;
+                }
+
+                @supports (display: flex) {
+                    .left,
+                    .right {
+                        width: 50%;
+                    }
+
+                    .left {
+                        display: flex;
+                        padding-right: 4em;
+
+                        align-items: center;
+                        justify-content: flex-end;
+                    }
+
+                    .right {
+                        height: 100%;
+                        margin-left: 0;
+                        padding: 0;
+                    }
+                }
+
+                .main-content {
+                    max-width: 580px;
+                    padding-right: 0;
+                }
+
+                .status-code {
+                    font-size: 6.125rem;
+                }
+
+                .status-message {
+                    max-width: 450px;
+                }
+
+                .page-title {
+                    font-size: 2.5rem;
+                }
+
+                .page-title:after {
+                    margin: 1.2em 0;
+                }
+            }
+        </style>
+        <script>
+            window.enhanced = (
+                'querySelector' in document &&
+                'addEventListener' in window &&
+                'matchMedia' in window &&
+                'classList' in document.createElement('div') &&
+                'history' in window &&
+                'go' in window.history
+            );
+        </script>
+    </head>
+
+    <body class="{{ body_class }}">
+        <div class="left">
+            <div class="main-content">
+                <span class="status-code">500</span>
+                <h1 class="page-title">Something went <span class="text-highlight">wrong</span></h1>
+                <p class="status-message">Please try again in a few minutes, if the error persists contact us for support.</p>
+                <div class="buttons">
+                    <a class="button button--home" href="{{ site.link }}">Go home</a>
+                </div>
+            </div>
+        </div>
+        <div class="right"></div>
+        <script>
+            if (window.enhanced) {
+                // Swap the html class
+                var h = document.documentElement;
+                h.classList.add('enhanced');
+                h.classList.remove('core');
+
+                // Add the back button
+                var buttons = document.querySelector('.buttons');
+                var button = document.createElement('button');
+                button.classList.add('button');
+                button.classList.add('button--back');
+                button.innerText = 'Go Back';
+
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    window.history.go(-1);
+                });
+
+                buttons.appendChild(button);
+            }
+        </script>
+
+        {{ function('wp_footer') }}
+    </body>
+</html>
