@@ -5,11 +5,12 @@
 
 namespace App;
 
+use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use Rareloop\Lumberjack\Post;
 use Timber\Timber;
 
-class SearchController
+class SearchController extends Controller
 {
     public function handle()
     {

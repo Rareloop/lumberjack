@@ -6,11 +6,12 @@
 
 namespace App;
 
+use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use Rareloop\Lumberjack\Post;
 use Timber\Timber;
 
-class SingleController
+class SingleController extends Controller
 {
     public function handle()
     {
