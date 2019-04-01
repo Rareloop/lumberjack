@@ -76,7 +76,9 @@ class IndexController
 
 ## You're in good company
 
-> Lumberjack has reinvigorated my passion for WordPress development by bringing in concepts and features from modern frameworks like Laravel. As a result, the speed and quality of the code I'm writing has improved and I'm actually enjoying WordPress projects again. - *Luke Hopkins*
+> Lumberjack is the deluxe version of what Modern WordPress should look like today. The team has done a great job of making it easy to build complicated custom applications while taking advantage of the best parts of WordPress.
+>
+> **_- Jared Novack - Timber creator_**
 
 ## Made by [Rareloop](https://rareloop.com)
 
