@@ -3,7 +3,7 @@
 ![Downloads](https://img.shields.io/packagist/dt/rareloop/lumberjack-core.svg)
 
 
-# Lumberjack
+# [![Lumberjack Logo](https://lumberjack.rareloop.com/app/themes/lumberjack/assets/img/logo.svg?ver=1554110589)](http://lumberjack.rareloop.com)
 
 **Supercharge your WordPress Development**
 
@@ -20,6 +20,10 @@ Use as little or as much as you need, it's beginner friendly!
 The Lumberjack documentation can be found here:
 
 [https://docs.lumberjack.rareloop.com](https://docs.lumberjack.rareloop.com)
+
+For more information, check out the website:
+
+[https://lumberjack.rareloop.com](https://lumberjack.rareloop.com)
 
 ## Getting Started
 
