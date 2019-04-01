@@ -4,11 +4,16 @@
 
 
 # Lumberjack
-A framework for making WordPress theme development more sane & easier to maintain.
 
-The framework has been designed to be as un-intrusive as possible and you're free to use as little or as much of it as you'd like.
+**Supercharge your WordPress Development**
 
-Written & maintained by the team at [Rareloop](https://www.rareloop.com).
+Lumberjack is a powerful MVC framework for the modern WordPress developer. Write better, more expressive and easier to maintain code.
+
+## Who is Lumberjack for?
+
+Coming from another PHP framework such as Laravel, have experience using Timber with WordPress but want more, or are just getting started with modern WordPress? Then Lumberjack is for you.
+
+Use as little or as much as you need, it's beginner friendly!
 
 ## Documentation
 
@@ -16,13 +21,61 @@ The Lumberjack documentation can be found here:
 
 [https://docs.lumberjack.rareloop.com](https://docs.lumberjack.rareloop.com)
 
-If you would like to see what a Lumberjack theme looks like, check out our example repo:
+## Getting Started
 
-[https://github.com/Rareloop/lumberjack-example](https://github.com/Rareloop/lumberjack-example)
+See the documentation for details on how to get started: [https://docs.lumberjack.rareloop.com/getting-started/installation](https://docs.lumberjack.rareloop.com/getting-started/installation)
 
-## References
+## Built on strong foundations
+
+Standing on the shoulders of giants, Lumberjack proudly builds on the great work of other open source WordPress projects.
+
 - [Bedrock](https://roots.io/bedrock/docs/installing-bedrock/)
 - [Timber](https://timber.github.io/docs/)
 
-## Installing
-See the documentation for details on how to get started: [https://docs.lumberjack.rareloop.com/getting-started/installation](https://docs.lumberjack.rareloop.com/getting-started/installation)
+## Beautiful code. Easy to maintain
+
+Object orientated and MVC patterns help keep your code structured and DRY.
+
+**index.php**
+
+```php
+class IndexController
+{
+    public function handle()
+    {
+        $context = Timber::get_context();
+        $context['posts'] = Post::whereStatus('publish')
+            ->limit(5)
+            ->get();
+
+        return new TimberResponse('index.twig', $context);
+    }
+}
+```
+
+**index.twig**
+
+```html
+{% if posts is not empty %}
+    <h4>Recent Articles</h4>
+    <ul>
+        {% for post in posts %}
+            <li class="article">
+                <h3>{{ $post->title }}</h3>
+                {{ $post->preview }}
+                <a href="{{ $post->link }}">Read the full story</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+```
+
+## You're in good company
+
+> Lumberjack has reinvigorated my passion for WordPress development by bringing in concepts and features from modern frameworks like Laravel. As a result, the speed and quality of the code I'm writing has improved and I'm actually enjoying WordPress projects again. - *Luke Hopkins*
+
+## Made by [Rareloop](https://rareloop.com)
+
+We're a Digital Product Studio based in Southampton (UK) with many years experience working on modern WordPress websites. We design and build digital products for a range of clients, take a look at what else we can do.
+
+[Find out more](https://rareloop.com)
