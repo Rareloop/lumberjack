@@ -3,9 +3,7 @@
 ![Downloads](https://img.shields.io/packagist/dt/rareloop/lumberjack-core.svg)
 
 
-# Lumberjack
-
-![Lumberjack Logo](https://lumberjack.rareloop.com/app/themes/lumberjack/assets/img/logo.svg?ver=1554110589)
+# ![Lumberjack Logo](https://lumberjack.rareloop.com/app/themes/lumberjack/assets/img/logo.svg?ver=1554110589)
 
 **Supercharge your WordPress Development**
 
