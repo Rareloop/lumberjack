@@ -11,13 +11,14 @@
 
 namespace App;
 
+use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use Timber\Timber;
 
 /**
  * Class names can not start with a number so the 404 controller has a special cased name
  */
-class Error404Controller
+class Error404Controller extends Controller
 {
     public function handle()
     {
