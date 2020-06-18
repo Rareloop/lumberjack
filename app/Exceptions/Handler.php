@@ -20,7 +20,7 @@ class Handler extends LumberjackHandler
         parent::report($e);
     }
 
-    public function render(ServerRequestInterface $request, Exception $e) : ResponseInterface
+    public function render(ServerRequestInterface $request, Exception $e): ResponseInterface
     {
         // Provide a customisable error rendering when not in debug mode
         try {

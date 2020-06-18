@@ -15,7 +15,7 @@ class Item extends TimberMenuItem
 
         // Add a modifier class if the item is the current page
         if ($data->current) {
-            $this->add_class($this->listItemClass.'--current');
+            $this->add_class($this->listItemClass . '--current');
         }
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Search results page
  */
@@ -17,7 +18,7 @@ class SearchController extends Controller
         $context = Timber::get_context();
         $searchQuery = get_search_query();
 
-        $context['title'] = 'Search results for \''.htmlspecialchars($searchQuery).'\'';
+        $context['title'] = 'Search results for \'' . htmlspecialchars($searchQuery) . '\'';
         $context['posts'] = Post::query([
             's' => $searchQuery,
         ]);

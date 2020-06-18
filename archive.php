@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying Archive pages.
  *
@@ -23,11 +24,11 @@ class ArchiveController extends Controller
         $data['title'] = 'Archive';
 
         if (is_day()) {
-            $data['title'] = 'Archive: '.get_the_date('D M Y');
+            $data['title'] = 'Archive: ' . get_the_date('D M Y');
         } elseif (is_month()) {
-            $data['title'] = 'Archive: '.get_the_date('M Y');
+            $data['title'] = 'Archive: ' . get_the_date('M Y');
         } elseif (is_year()) {
-            $data['title'] = 'Archive: '.get_the_date('Y');
+            $data['title'] = 'Archive: ' . get_the_date('Y');
         } elseif (is_tag()) {
             $data['title'] = single_tag_title('', false);
         } elseif (is_category()) {
