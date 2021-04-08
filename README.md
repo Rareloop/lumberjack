@@ -1,11 +1,12 @@
 [![framework](https://img.shields.io/github/release/rareloop/lumberjack-core.svg)](https://github.com/Rareloop/lumberjack/releases)
 [![GitHub license](https://img.shields.io/github/license/rareloop/lumberjack.svg)](https://github.com/Rareloop/lumberjack/blob/master/LICENSE.txt)
 ![Downloads](https://img.shields.io/packagist/dt/rareloop/lumberjack-core.svg)
+[![Trees Planted](https://img.shields.io/ecologi/trees/rareloop.svg?label=trees%20planted)](https://ecologi.com/rareloop?r=60618d1bcdd7a4001d7b86f2)
 
 
-# [![Lumberjack Logo](https://lumberjack.rareloop.com/app/themes/lumberjack/assets/img/logo.svg?ver=1554110589)](http://lumberjack.rareloop.com)
+<img src="https://lumberjack.rareloop.com/app/themes/lumberjack/assets/img/logo.svg" alt="Lumberjack Logo" />
 
-**Supercharge your WordPress Development**
+# Supercharge your WordPress Development
 
 Lumberjack is a powerful MVC framework for the modern WordPress developer. Write better, more expressive and easier to maintain code.
 
@@ -24,6 +25,8 @@ The Lumberjack documentation can be found here:
 For more information, check out the website:
 
 [https://lumberjack.rareloop.com](https://lumberjack.rareloop.com)
+
+*Note: This repository is just the starter theme used for the project and doesn't require updating very often. The majority of the development work, and where progress can be seen if you're interested, is in the [framework repository](https://github.com/Rareloop/lumberjack-core)*
 
 ## Getting Started
 
@@ -85,3 +88,12 @@ class IndexController
 We're a Digital Product Studio based in Southampton (UK) with many years experience working on modern WordPress websites. We design and build digital products for a range of clients, take a look at what else we can do.
 
 [Find out more](https://rareloop.com)
+
+## Licence & Giving Back
+Lumberjack is available under the [MIT license](https://github.com/Rareloop/lumberjack/blob/master/LICENSE.txt) and you're free to use it for personal or commercial projects.
+
+**If you've recieved value from Lumberjack we'd hugely appreciate it if you could donate to our [Ecologi forest](https://ecologi.com/rareloop?r=60618d1bcdd7a4001d7b86f2) and help us plant real life trees to combat the climate crisis. Compared to the cost of developing a framework like Lumberjack, a few trees per project is a bargain and makes a positive difference to the environment.**
+
+[![Trees Planted](https://img.shields.io/ecologi/trees/rareloop.svg?label=trees%20planted&style=for-the-badge)](https://ecologi.com/rareloop?r=60618d1bcdd7a4001d7b86f2)
+
+[Help us plant real life trees 🌱](https://ecologi.com/rareloop?r=60618d1bcdd7a4001d7b86f2)
