@@ -19,6 +19,6 @@
         "lumberjack", "composer", "wordpress", "wp", "theme", "timber", "twig", "mvc", "dry"
     ],
     "require": {
-        "composer/installers": "^1.0"
+        "composer/installers": "^2.0.1"
     }
 }
