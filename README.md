@@ -50,7 +50,7 @@ class IndexController
 {
     public function handle()
     {
-        $context = Timber::get_context();
+        $context = Timber::context();
         $context['posts'] = Post::whereStatus('publish')
             ->limit(5)
             ->get();

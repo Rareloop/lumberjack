@@ -47,7 +47,7 @@ return [
     'logs' => [
         'enabled' => true,
         'path' => false,
-        'level' => Monolog\Logger::ERROR,
+        'level' => Monolog\Level::Error,
     ],
 
     'themeSupport' => [
