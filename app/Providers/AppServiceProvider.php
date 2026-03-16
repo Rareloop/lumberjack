@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Menu\Item;
 use App\Menu\Menu;
+use Illuminate\Support\Arr;
 use Rareloop\Lumberjack\Page;
 use Rareloop\Lumberjack\Post;
 use Rareloop\Lumberjack\Providers\ServiceProvider;
@@ -21,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         add_filter('timber/post/classmap', fn($classmap) => [
-            ...$classmap,
+            ...Arr::wrap($classmap),
             Post::getPostType() => Post::class,
             Page::getPostType() => Page::class,
         ]);
