@@ -16,9 +16,18 @@
         }
     ],
     "keywords": [
-        "lumberjack", "composer", "wordpress", "wp", "theme", "timber", "twig", "mvc", "dry"
+        "lumberjack",
+        "composer",
+        "wordpress",
+        "wp",
+        "theme",
+        "timber",
+        "twig",
+        "mvc",
+        "dry"
     ],
     "require": {
+        "php": ">=8.3",
         "composer/installers": "^1.0"
     }
 }

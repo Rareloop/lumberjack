@@ -20,7 +20,7 @@ class ArchiveController extends Controller
 {
     public function handle()
     {
-        $data = Timber::get_context();
+        $data = Timber::context();
         $data['title'] = 'Archive';
 
         if (is_day()) {

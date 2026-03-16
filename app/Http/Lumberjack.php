@@ -4,6 +4,7 @@ namespace App\Http;
 
 use Rareloop\Lumberjack\Http\Lumberjack as LumberjackCore;
 use App\Menu\Menu;
+use Timber\Timber;
 
 class Lumberjack extends LumberjackCore
 {
@@ -18,7 +19,7 @@ class Lumberjack extends LumberjackCore
         // the context, you can get items from it in a way that is a little smoother and more
         // versatile than Wordpress's wp_nav_menu. (You need never again rely on a
         // crazy "Walker Function!")
-        $context['menu'] = new Menu('main-nav');
+        $context['menu'] = Timber::get_menu('main-nav');
 
         return $context;
     }

@@ -23,6 +23,6 @@ class Error404Controller extends Controller
 {
     public function handle()
     {
-        return new TimberResponse('templates/errors/404.twig', Timber::get_context(), 404);
+        return new TimberResponse('templates/errors/404.twig', Timber::context(), 404);
     }
 }

@@ -19,7 +19,7 @@ class IndexController extends Controller
 {
     public function handle()
     {
-        $context = Timber::get_context();
+        $context = Timber::context();
         $context['posts'] = Post::all();
 
         return new TimberResponse('templates/posts.twig', $context);
