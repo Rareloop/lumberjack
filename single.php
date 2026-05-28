@@ -8,19 +8,17 @@ namespace App;
 
 use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
-use Timber\Timber;
+use Rareloop\Lumberjack\Post;
+use Rareloop\Lumberjack\Http\TimberContext;
 
 class SingleController extends Controller
 {
-    public function handle()
+    public function handle(Post $post, TimberContext $context)
     {
-        $context = Timber::context();
-        $post = Timber::get_post();
-
-        $context['post'] = $post;
-        $context['title'] = $post->title;
-        $context['content'] = $post->content;
-
-        return new TimberResponse('templates/generic-page.twig', $context);
+        return new TimberResponse('templates/generic-page.twig', $context->merge([
+            'post' => $post,
+            'title' => $post->title,
+            'content' => $post->content,
+        ]));
     }
 }

@@ -14,15 +14,15 @@ namespace App;
 
 use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
-use Timber\Timber;
+use Rareloop\Lumberjack\Http\TimberContext;
 
 /**
  * Class names can not start with a number so the 404 controller has a special cased name
  */
 class Error404Controller extends Controller
 {
-    public function handle()
+    public function handle(TimberContext $context)
     {
-        return new TimberResponse('templates/errors/404.twig', Timber::context(), 404);
+        return new TimberResponse('templates/errors/404.twig', $context, 404);
     }
 }
