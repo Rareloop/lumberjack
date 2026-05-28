@@ -8,21 +8,18 @@ namespace App;
 
 use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
-use Rareloop\Lumberjack\Post;
-use Timber\Timber;
+use Rareloop\Lumberjack\Http\PostQuery;
+use Rareloop\Lumberjack\Http\TimberContext;
 
 class SearchController extends Controller
 {
-    public function handle()
+    public function handle(PostQuery $posts, TimberContext $context)
     {
-        $context = Timber::context();
         $searchQuery = get_search_query();
 
-        $context['title'] = 'Search results for \'' . htmlspecialchars($searchQuery) . '\'';
-        $context['posts'] = Post::query([
-            's' => $searchQuery,
-        ]);
-
-        return new TimberResponse('templates/posts.twig', $context);
+        return new TimberResponse('templates/posts.twig', $context->merge([
+            'title' => 'Search results for \'' . htmlspecialchars($searchQuery) . '\'',
+            'posts' => $posts,
+        ]));
     }
 }

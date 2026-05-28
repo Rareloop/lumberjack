@@ -8,26 +8,18 @@ namespace App;
 
 use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
-use Rareloop\Lumberjack\Post;
-use Timber\Timber;
-use Timber\User as TimberUser;
+use Rareloop\Lumberjack\Http\PostQuery;
+use Rareloop\Lumberjack\Http\TimberContext;
+use Rareloop\Lumberjack\User;
 
 class AuthorController extends Controller
 {
-    public function handle()
+    public function handle(User $user, PostQuery $posts, TimberContext $context)
     {
-        global $wp_query;
-
-        $data = Timber::context();
-        $author = new TimberUser($wp_query->query_vars['author']);
-
-        $data['author'] = $author;
-        $data['title'] = 'Author Archives: ' . $author->name();
-
-        $data['posts'] = Post::query([
-            'author' => $author->ID
-        ]);
-
-        return new TimberResponse('templates/posts.twig', $data);
+        return new TimberResponse('templates/posts.twig', $context->merge([
+            'author' => $user,
+            'title' => 'Author Archives: ' . $user->name(),
+            'posts' => $posts,
+        ]));
     }
 }
